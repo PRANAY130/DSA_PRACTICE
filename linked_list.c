@@ -1,26 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node{
+// Define the structure for a linked list node
+struct Node {
     int data;
-    struct node* next;
+    struct Node* next;
 };
 
-struct node* head=NULL;
+// Function to create a linked list of n elements
+struct Node* createLinkedList(int n) {
+    struct Node* head = NULL;
+    struct Node* temp = NULL;
+    struct Node* newNode = NULL;
+    int data, i;
 
-void createnode(int data){
-    struct node* temp, *q;
-    temp=(struct node *)malloc(sizeof(struct node));
-    temp->data=data;
-    temp->next=NULL;
-    if(head==NULL){
-        head=temp;
-    }
-    else{
-        q=head;
-        while(q!=NULL){
-            q=q->next;
+    // Loop to create 'n' nodes
+    for (i = 1; i <= n; i++) {
+        printf("Enter data for node %d: ", i);
+        scanf("%d", &data);
+
+        // Create a new node
+        newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->data = data;
+        newNode->next = NULL;
+
+        if (head == NULL) {
+            head = newNode;
+        } else {
+            temp->next = newNode;
         }
-        q->next=temp;
+        temp = newNode;
     }
+    return head;
 }
