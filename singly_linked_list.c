@@ -30,11 +30,27 @@ struct Node * createLinkedList (int n){
     return head;
 }
 
+void printList(struct Node* head) {
+    struct Node* temp = head;
+
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
 int main(){
     struct Node * head = NULL;\
     int n;
     printf("Enter the number of nodes youy want to create : ");
     scanf("%d" , &n);
     head = createLinkedList(n);
+    printList(head);
     return 0;
 }
