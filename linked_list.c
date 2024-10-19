@@ -61,3 +61,32 @@ void insertAtEnd(struct Node **head,int data){
     }
     temp->next=newNode;
 }
+
+void insertAtAnyPosition(struct Node **head, int data, int position){
+    struct Node *temp=NULL;
+    struct Node *newNode=(struct Node*)malloc(sizeof(struct Node));
+    newNode->data=data;
+    newNode->next=NULL;
+    if (position==1){
+        newNode->next=*head;
+        *head=newNode;
+    }
+    else {
+        temp=*head;
+        for(int i=0;i<=position-2;i++){
+            temp=temp->next;
+        }
+        if (temp==NULL){
+            printf("Position is invalid");
+            return;
+        }
+        if(temp->next=NULL){
+            printf("At the end");
+            temp->next=newNode;
+            return;
+        }
+        newNode->next=temp->next;
+        temp->next=newNode;
+    }
+
+}
