@@ -90,3 +90,12 @@ void insertAtAnyPosition(struct Node **head, int data, int position){
     }
 
 }
+
+int main(){
+    struct Node * head = NULL;\
+    int n;
+    printf("Enter the number of nodes youy want to create : ");
+    scanf("%d" , &n);
+    head = createLinkedList(n);
+    return 0;
+}
