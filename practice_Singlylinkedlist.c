@@ -44,7 +44,7 @@ void displaylinkedlist(struct Node** head){
 }
 
 void insertatanyposition(struct Node** head, int data, int index){
-    struct Node* newnode=NULL;
+    struct Node* newnode=(struct Node*)malloc(sizeof(struct Node));
     struct Node* temp=*head;
     newnode->data=data;
     newnode->next=NULL;
@@ -52,7 +52,13 @@ void insertatanyposition(struct Node** head, int data, int index){
         printf("The list is empty. Inserting at the beginning...\n");
         *head=newnode;
     }
-    for (int i=0;temp!=NULL && i<=index-1;i++){
+
+    if(index==1){
+        newnode->next=*head;
+        *head=newnode;
+        return;
+    }
+    for (int i=1;temp!=NULL && i<index-1;i++){
         temp=temp->next;
     }
     if(temp==NULL){
@@ -62,4 +68,32 @@ void insertatanyposition(struct Node** head, int data, int index){
     }
     newnode->next=temp->next;
     temp->next=newnode;
+}
+
+void deleteatanyposition(struct Node** head, int index){
+    struct Node* temp=*head;
+    
+    if(*head==NULL){
+        printf("nothing to delete\n");
+        return;
+    }
+    if(index==1){
+        (*head)=(*head)->next;
+        free(temp);
+        return;
+    }
+
+    struct Node* prev=NULL;
+
+    for (int i=1;temp!=NULL && i<index-1;i++){
+        prev=temp;
+        temp=temp->next;
+    }
+
+    if(temp==NULL){
+        printf("The position %d is not present.deletion is not possible");
+        return;
+    }
+    prev->next=temp->next;
+    free(temp);
 }
