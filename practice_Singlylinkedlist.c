@@ -105,7 +105,25 @@ void insertatbeginning(struct Node** head, int data){
     if (*head==NULL){
         printf("The list is empty\n");
         *head=newnode;
+        return;
     }
     newnode->next=*head;
     *head=newnode;
+}
+
+void insertatend(struct Node** head, int data){
+    struct Node* newnode=(struct Node*)malloc(sizeof(struct Node));
+    struct Node* temp=*head;
+    newnode->data=data;
+    newnode->next=NULL;
+    if (*head==NULL){
+        printf("The list is empty\n");
+        *head=newnode;
+        return;
+    }
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    newnode->next=temp->next;
+    temp->next=newnode;
 }
