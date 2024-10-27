@@ -28,3 +28,17 @@ struct Node* createlinkedlist(int n){
     }
     return head;
 }
+
+void displaylinkedlist(struct Node** head){
+    struct Node* temp=*head;
+    if (*head==NULL){
+        printf("The list is empty ");
+        return;
+    }
+    printf("The linked list is \n");
+    while(temp!=NULL){
+        printf("%d->",temp->data);
+        temp=temp->next;
+    }
+    printf("NULL\n");
+}
