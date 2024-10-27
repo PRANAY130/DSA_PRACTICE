@@ -127,3 +127,14 @@ void insertatend(struct Node** head, int data){
     newnode->next=temp->next;
     temp->next=newnode;
 }
+
+void deleteatbeginning(struct Node** head){
+    struct Node* temp=*head;
+    if(*head==NULL){
+        printf("nothing to delete");
+        return;
+    }
+    *head=(*head)->next;
+    free(temp);
+    return;
+}
