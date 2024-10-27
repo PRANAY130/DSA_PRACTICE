@@ -78,14 +78,14 @@ void deleteatanyposition(struct Node** head, int index){
         return;
     }
     if(index==1){
-        (*head)=(*head)->next;
+        (*head)=temp->next;
         free(temp);
         return;
     }
 
     struct Node* prev=NULL;
 
-    for (int i=1;temp!=NULL && i<index-1;i++){
+    for (int i=1;temp!=NULL && i<index;i++){
         prev=temp;
         temp=temp->next;
     }
@@ -181,10 +181,10 @@ int main(){
     // Create a linked list with 'n' elements
     printf("Enter the number of nodes you want to create: ");
     scanf("%d", &n);
-    head = createLinkedList(n);
+    head = createlinkedlist(n);
 
     while(1){
-        printf("Here are all the choices");
+        printf("Here are all the choices\n");
         printf("Enter 1 for insert at beginning\n");
         printf("Enter 2 for insert at end\n");
         printf("Enter 3 for insert at any position\n");
@@ -216,7 +216,7 @@ int main(){
                 scanf("%d", &position);
                 printf("Enter data to insert: ");
                 scanf("%d", &data);
-                insertatposition(&head, data, position);
+                insertatanyposition(&head, data, position);
                 break;
             case 4:
                 deleteatbeginning(&head);
@@ -227,7 +227,7 @@ int main(){
             case 6:
                 printf("Enter the position to delete: ");
                 scanf("%d", &position);
-                deleteAtPosition(&head, position);
+                deleteatanyposition(&head, position);
                 break;
             case 7:
                 printf("Enter value of element to search: ");
