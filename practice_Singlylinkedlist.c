@@ -32,7 +32,7 @@ struct Node* createlinkedlist(int n){
 void displaylinkedlist(struct Node** head){
     struct Node* temp=*head;
     if (*head==NULL){
-        printf("The list is empty ");
+        printf("The list is empty\n ");
         return;
     }
     printf("The linked list is \n");
@@ -62,7 +62,7 @@ void insertatanyposition(struct Node** head, int data, int index){
         temp=temp->next;
     }
     if(temp==NULL){
-        printf("The position %d is not present.insertion is not possible");
+        printf("The position %d is not present.insertion is not possible\n");
         free(newnode);
         return;
     }
@@ -91,7 +91,7 @@ void deleteatanyposition(struct Node** head, int index){
     }
 
     if(temp==NULL){
-        printf("The position %d is not present.deletion is not possible");
+        printf("The position %d is not present.deletion is not possible\n");
         return;
     }
     prev->next=temp->next;
@@ -131,7 +131,7 @@ void insertatend(struct Node** head, int data){
 void deleteatbeginning(struct Node** head){
     struct Node* temp=*head;
     if(*head==NULL){
-        printf("nothing to delete");
+        printf("nothing to delete\n");
         return;
     }
     *head=(*head)->next;
@@ -144,7 +144,7 @@ void deleteatend(struct Node** head){
     struct Node* prev=NULL; 
 
     if(*head==NULL){
-        printf("nothing to delete");
+        printf("nothing to delete\n");
         return;
     }
 
@@ -155,4 +155,95 @@ void deleteatend(struct Node** head){
     prev->next=temp->next;
     free(temp);
     return;  
+}
+
+void searchelement(struct Node** head,int key){
+    struct Node* temp=*head;
+    int position=0;
+    while(temp!=NULL){
+        position++;
+        if(temp->data==key){
+            printf("The element %d is at %d position\n",key,position);
+            return;
+        }
+        temp=temp->next;
+    }
+    if(temp==NULL){
+        printf("The element is not present in the list\n");
+    }     
+}
+
+
+int main(){
+    struct Node* head = NULL;
+    int n, choice, data, key, position;
+
+    // Create a linked list with 'n' elements
+    printf("Enter the number of nodes you want to create: ");
+    scanf("%d", &n);
+    head = createLinkedList(n);
+
+    while(1){
+        printf("Here are all the choices");
+        printf("Enter 1 for insert at beginning\n");
+        printf("Enter 2 for insert at end\n");
+        printf("Enter 3 for insert at any position\n");
+        printf("Enter 4 for delete at beginning\n");
+        printf("Enter 5 for delete at end\n");
+        printf("Enter 6 for delete at any position\n");
+        printf("Enter 7 for search\n");
+        printf("Enter 8 for printing the list\n");
+        printf("Enter 9 for exiting\n");
+
+        printf("\n");
+
+        printf("Enter your choice: ");
+        scanf("%d",&choice);
+
+        switch (choice){
+            case 1:
+                printf("Enter data to insert at the beginning: ");
+                scanf("%d", &data);
+                insertatbeginning(&head, data);
+                break;
+            case 2:
+                printf("Enter data to insert at the end: ");
+                scanf("%d", &data);
+                insertatend(&head, data);
+                break;
+            case 3:
+                printf("Enter the position to insert at: ");
+                scanf("%d", &position);
+                printf("Enter data to insert: ");
+                scanf("%d", &data);
+                insertatposition(&head, data, position);
+                break;
+            case 4:
+                deleteatbeginning(&head);
+                break;
+            case 5:
+                deleteatend(&head);
+                break;
+            case 6:
+                printf("Enter the position to delete: ");
+                scanf("%d", &position);
+                deleteAtPosition(&head, position);
+                break;
+            case 7:
+                printf("Enter value of element to search: ");
+                scanf("%d", &key);
+                searchelement(&head,key);
+                break;
+            case 8:
+                displaylinkedlist(&head);
+                break;
+            case 9:
+                printf("Exiting program.\n");
+                exit(0);
+                break;
+            default:
+                printf("Invalid choice! Please try again.\n");           
+
+        }
+    }
 }
