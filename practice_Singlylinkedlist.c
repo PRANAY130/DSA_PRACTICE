@@ -138,3 +138,21 @@ void deleteatbeginning(struct Node** head){
     free(temp);
     return;
 }
+
+void deleteatend(struct Node** head){
+    struct Node* temp=*head;   
+    struct Node* prev=NULL; 
+
+    if(*head==NULL){
+        printf("nothing to delete");
+        return;
+    }
+
+    while(temp->next!=NULL){
+        prev=temp;
+        temp=temp->next;
+    }
+    prev->next=temp->next;
+    free(temp);
+    return;  
+}
