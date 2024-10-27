@@ -97,3 +97,15 @@ void deleteatanyposition(struct Node** head, int index){
     prev->next=temp->next;
     free(temp);
 }
+
+void insertatbeginning(struct Node** head, int data){
+    struct Node* newnode=(struct Node*)malloc(sizeof(struct Node));
+    newnode->data=data;
+    newnode->next=NULL;
+    if (*head==NULL){
+        printf("The list is empty\n");
+        *head=newnode;
+    }
+    newnode->next=*head;
+    *head=newnode;
+}
