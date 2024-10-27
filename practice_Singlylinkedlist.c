@@ -42,3 +42,24 @@ void displaylinkedlist(struct Node** head){
     }
     printf("NULL\n");
 }
+
+void insertatanyposition(struct Node** head, int data, int index){
+    struct Node* newnode=NULL;
+    struct Node* temp=*head;
+    newnode->data=data;
+    newnode->next=NULL;
+    if(*head==NULL){
+        printf("The list is empty. Inserting at the beginning...\n");
+        *head=newnode;
+    }
+    for (int i=0;temp!=NULL && i<=index-1;i++){
+        temp=temp->next;
+    }
+    if(temp==NULL){
+        printf("The position %d is not present.insertion is not possible");
+        free(newnode);
+        return;
+    }
+    newnode->next=temp->next;
+    temp->next=newnode;
+}
