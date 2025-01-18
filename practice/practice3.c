@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<ctype.h>;
+#include<ctype.h>
 #include<string.h>
 
 #define max 100
@@ -9,16 +9,17 @@ int top=-1;
 
 void push(char ch){
     if(top==max-1){
-        printf("The stack is empty\n");
-        return;
+        printf("The stack is full\n");
     }
-    stack[++top]=ch;
+    else{
+        stack[++top]=ch;
+        }
 }
 
 char pop(){
-    if(top=-1){
+    if(top==-1){
         printf("The stack is empty\n");
-        return;
+        return '\0';
     }
     char data=stack[top--];
     return data;
@@ -67,7 +68,7 @@ void infix_to_postfix(char infix[],char postfix[]){
             push(ch);
         }
         else if (ch==')'){
-            while(!isempty && peek()!='('){
+            while(!isempty() && peek()!='('){
                 postfix[j++]=pop();
             }
             pop();
@@ -82,5 +83,46 @@ void infix_to_postfix(char infix[],char postfix[]){
     while(!isempty()){
         postfix[j++]=pop();
     }
-    postfix[j]='/0';
+    postfix[j]='\0';
+}
+
+void reverse(char infix[],char infix_reversed[]){
+    int len=strlen(infix);
+    for (int i=0;i<len;i++){
+        infix_reversed[len-i-1]=infix[i];
+    }
+    infix_reversed[len]='\0';
+
+    for(int i=0;infix_reversed[i]!='\0';i++){
+        if(infix_reversed[i]=='('){
+            infix_reversed[i]=')';
+        }
+        else if(infix_reversed[i]==')'){
+            infix_reversed[i]='(';
+        }
+    }
+
+}
+void infix_prefix(char infix[],char prefix[]){
+    char reverse_str[max];
+    char postfix[max];
+    reverse(infix,reverse_str);
+    infix_to_postfix(reverse_str,postfix);
+    reverse(postfix,prefix);
+
+    
+}
+
+int main(){
+    char infix[max];
+    char postfix[max];
+    char prefix[max];
+    printf("Enter the infix expression:\n");
+    scanf("%s",infix);
+    infix_to_postfix(infix,postfix);
+    infix_prefix(infix,prefix);
+    printf("%s",postfix);
+    printf("\n");
+    printf("%s",prefix);
+    return 0;
 }
