@@ -54,4 +54,33 @@ int precedence(char ch){
     return 0;
 }
 
-void infix_to_postfix(){}
+void infix_to_postfix(char infix[],char postfix[]){
+    int i,j=0;
+    char ch;
+    for(i=0;infix[i]!='\0';i++){
+        ch=infix[i];
+
+        if(isalnum(ch)){
+            postfix[j++]=ch;
+        }
+        else if(ch=='('){
+            push(ch);
+        }
+        else if (ch==')'){
+            while(!isempty && peek()!='('){
+                postfix[j++]=pop();
+            }
+            pop();
+        }
+        else if(isoperator(ch)){
+            while(!isempty() && precedence(peek())>=precedence(ch)){
+                postfix[j++]=pop();
+            }
+            push(ch);
+        }
+    }
+    while(!isempty()){
+        postfix[j++]=pop();
+    }
+    postfix[j]='/0';
+}
