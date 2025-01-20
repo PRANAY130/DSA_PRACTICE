@@ -1,2 +1,3 @@
 paper rock
 Computer Win
+cows=4 bulls=2cows=5 bulls=3
