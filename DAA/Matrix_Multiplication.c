@@ -21,8 +21,14 @@ int matrixChainRec(int arr[], int i, int j) {
 }
 
 int main() {
-    int arr[] = {10, 30, 5, 60};
-    int n = sizeof(arr) / sizeof(arr[0]);
+    int n;
+    printf("Enter the nnumber of matrices: ");
+    scanf("%d", &n);
+    int arr[n];
+    for (int i=0;i<n;i++){
+        printf("Enter the dimension of matrix %d: ", i+1);
+        scanf("%d", &arr[i]);
+    }
 
     printf("Minimum number of multiplications is %d\n", matrixChainRec(arr, 1, n-1));
     return 0;
